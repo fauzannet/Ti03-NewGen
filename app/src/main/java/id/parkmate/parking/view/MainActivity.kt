@@ -43,6 +43,7 @@ import id.parkmate.parking.model.data.profile
 import id.parkmate.parking.model.data.sessionmanager
 import id.parkmate.parking.model.data.sessionmanager.Companion.Nama
 import id.parkmate.parking.model.data.sessionmanager.Companion.Npm
+import id.parkmate.parking.model.data.sessionmanager.Companion.NpmImg
 import id.parkmate.parking.model.data.sessionmanager.Companion.waktucheckIN
 import id.parkmate.parking.model.service.ApiClient
 import id.parkmate.parking.model.service.waktu
@@ -68,8 +69,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
 
-        sharedPreferences = getSharedPreferences("E-PARKING", Context.MODE_PRIVATE)
+        sharedPreferences = getSharedPreferences("E-PARKING", MODE_PRIVATE)
         val nama = sharedPreferences.getString(Nama, null)
+        val foto = sharedPreferences.getString(NpmImg, null)
         val getImage = dataprofiles().NpmImg
         checkdatabase()
 
@@ -84,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         val layoutcheckin = findViewById<LinearLayout>(R.id.layoutcheckin)
         val layoutnopol = findViewById<LinearLayout>(R.id.layoutnopol)
         val imageUser = findViewById<ImageView>(R.id.ivUser)
-        Picasso.get().load("$getImage").into(imageUser)
+        Picasso.get().load(foto).into(imageUser)
 
         val judul = findViewById<TextView>(R.id.judul)
         judul.text = "$nama"
@@ -122,7 +124,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         checkintbn.setOnClickListener {
-            sharedPreferences = getSharedPreferences("E-PARKING", Context.MODE_PRIVATE)
+            sharedPreferences = getSharedPreferences("E-PARKING", MODE_PRIVATE)
             val npm = sharedPreferences.getString(Npm, null)
             val npmsplit = npm?.replace(".", "")
             val userRef = database.getReference("user")
@@ -201,7 +203,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun qrgen(){
 
-        sharedPreferences = getSharedPreferences("E-PARKING", Context.MODE_PRIVATE)
+        sharedPreferences = getSharedPreferences("E-PARKING", MODE_PRIVATE)
         val nama = sharedPreferences.getString(Nama, null)
         val npm = sharedPreferences.getString(Npm, null)
         val waktus = sharedPreferences.getString(waktucheckIN, null)
@@ -266,7 +268,7 @@ class MainActivity : AppCompatActivity() {
 
 
         fun checkdatabase(){
-            sharedPreferences = getSharedPreferences("E-PARKING", Context.MODE_PRIVATE)
+            sharedPreferences = getSharedPreferences("E-PARKING", MODE_PRIVATE)
             val nama = sharedPreferences.getString(Nama, null)
             val npm = sharedPreferences.getString(Npm, null)
             val npmsplit = npm?.replace(".", "")
@@ -294,7 +296,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         fun checkstatus(){
-            sharedPreferences = getSharedPreferences("E-PARKING", Context.MODE_PRIVATE)
+            sharedPreferences = getSharedPreferences("E-PARKING", MODE_PRIVATE)
             val npm = sharedPreferences.getString(Npm, null)
             val npmsplit = npm?.replace(".", "")
             val userRef = database.getReference("user")

@@ -293,11 +293,13 @@ class MainActivity : AppCompatActivity() {
             val userRef = database.getReference("data")
             userRef.child("kapasitas").addListenerForSingleValueEvent(object: ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    val booleanValue = dataSnapshot.getValue(Boolean::class.java)
-
                         val nilai = dataSnapshot.value.toString().toInt()
                         val nilaiBaru = nilai - 1
-                    Log.d("kapasitas","nilai")
+                    Log.d("kapasitas","nilai = $nilai")
+                    Log.d("kapasitas","nilai pengurangan = $nilaiBaru")
+                    val stringnilai: String = nilaiBaru.toString()
+                    userRef.child("kapasitas").setValue(stringnilai)
+                    Log.d("kapasitas",stringnilai)
                 }
                 override fun onCancelled(error: DatabaseError) {
                     // An error occurred

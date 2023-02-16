@@ -15,5 +15,5 @@ class waktu {
     val menitString = String.format("%02d", menit)
     val detikString = String.format("%02d", detik)
 
-    val waktuString = "$day/$month/$year,$jamString:$menitString:$detikString"
+    val waktuString = "$day-$month-$year: $jamString:$menitString:$detikString"
 }

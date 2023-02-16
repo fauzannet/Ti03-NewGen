@@ -38,6 +38,7 @@ import id.parkmate.R
 import id.parkmate.parking.model.data.sessionmanager
 import id.parkmate.parking.model.data.sessionmanager.Companion.Nama
 import id.parkmate.parking.model.data.sessionmanager.Companion.Npm
+import id.parkmate.parking.model.data.sessionmanager.Companion.waktucheckIN
 import id.parkmate.parking.model.service.ApiClient
 import id.parkmate.parking.model.service.waktu
 import java.util.*
@@ -113,9 +114,26 @@ class MainActivity : AppCompatActivity() {
         }
 
         checkintbn.setOnClickListener {
+            sharedPreferences = getSharedPreferences("E-PARKING", Context.MODE_PRIVATE)
+            val npm = sharedPreferences.getString(Npm, null)
+            val npmsplit = npm?.replace(".", "")
+            val userRef = database.getReference("user")
+            userRef.child("$npmsplit").child("status").setValue(true)
+            sessionManager.hascheckin()
 
-            val intent = Intent(this, scanqr::class.java)
+            val waktus = waktu().waktuString
+
+            val editor: SharedPreferences.Editor = sharedPreferences.edit()
+            editor.putString(waktucheckIN, waktus)
+            sessionManager.waktucheckin(waktus)
+
+            Log.d(tag, "di split = $npmsplit")
+            val waktuss = sharedPreferences.getString(waktucheckIN, null)
+            Log.d(tag, "$waktuss")
+            finish()
+            overridePendingTransition(0, 0)
             startActivity(intent)
+            overridePendingTransition(0, 0)
         }
 
         buttoncheckin.setOnClickListener {
@@ -178,9 +196,10 @@ class MainActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("E-PARKING", Context.MODE_PRIVATE)
         val nama = sharedPreferences.getString(Nama, null)
         val npm = sharedPreferences.getString(Npm, null)
+        val waktus = sharedPreferences.getString(waktucheckIN, null)
         val editTextnopol = findViewById<EditText>(R.id.nopol)
         val nopol = editTextnopol.text.toString()
-        val waktus = waktu().waktuString
+
 
         val dialog = BottomSheetDialog(this, R.style.MyTransparentDialog)
 
@@ -196,7 +215,6 @@ class MainActivity : AppCompatActivity() {
         Log.d(tag, "Nama : $nama")
         Log.d(tag, "Npm : $npm")
         Log.d(tag, "nopol : $nopol")
-        Log.d(tag, "Waktu : $waktus")
 
         qrcodes.setImageBitmap(qrEncoder.bitmap)
 
@@ -279,6 +297,7 @@ class MainActivity : AppCompatActivity() {
                     if (booleanValue == true) {
                         userRef.child("$npmsplit").child("status").setValue(false)
                         sessionManager.undocheckin()
+                        sessionManager.hapuscheckin()
                         Log.d(tag, "status true ke false")
                         finish()
                         overridePendingTransition(0, 0)

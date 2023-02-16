@@ -12,6 +12,7 @@ class sessionmanager (context: Context) {
         const val Nama = "TestNama"
         const val Npm = "TestNpm"
         const val NpmImg = "TestNpmImg"
+        const val waktucheckIN = "waktucheckin"
     }
 
     /**
@@ -38,6 +39,16 @@ class sessionmanager (context: Context) {
         editor.apply()
     }
 
+    fun waktucheckin(waktucheckin: String) {
+        val editor = prefs.edit()
+        editor.putString(waktucheckIN, waktucheckin)
+        editor.apply()
+    }
+
+    fun hapuscheckin() {
+        val editor = prefs.edit()
+        editor.remove("waktucheckin")
+    }
     /**
      * Function to fetch auth token
      */

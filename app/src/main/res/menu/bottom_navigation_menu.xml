@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/generates"
+        android:icon="@drawable/ic_qrcode"
+        android:title="Scan Plat" />
+    <item
+        android:id="@+id/generatesss"
+        android:icon="@drawable/ic_qrcode"
+        android:title="Scan Plat" />
+    <item
+        android:id="@+id/generatess"
+        android:icon="@drawable/ic_qrcode"
+        android:title="Scan Plat" />
+
+</menu>

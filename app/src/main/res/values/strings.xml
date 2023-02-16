@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">ParkMate</string>
+    <string name="qrcode">Scan Here</string>
+    <string name="permission_required">test</string>
+    <string name="scanplatnomor">Scan Plat Number</string>
+    <string name="nomorplatkendaraan">Vehicle Plate Number</string>
+    <string name="makeqr">Make QR</string>
+    <string name="masukareaparkir">Enter the Parking Area?</string>
+    <string name="scanqrcheckin">Check in Parking</string>
+    <string name="parkir">Parking</string>
+    <string name="checkparkir">Check Available Parking</string>
+    <string name="countqr">Valid for :</string>
+    <string name="tutup">Closed</string>
+    <string name="judulqr">Your QR Code</string>
+    <string name="tagline">Safe and Convenient parking</string>
+    <string name="login">Login</string>
+    <string name="errortitle">Error</string>
+    <string name="errormessage">Please Enter Vehicle plate Number!</string>
+    <string name="successtitle">successful Check in</string>
+    <string name="aktivitas">Activity</string>
+    <string name="waktucheckin">" check-in time"</string>
+    <string name="waktucheckout">" check-out time"</string>
+    <string name="errortitlecheckin">Checkin Error</string>
+</resources>

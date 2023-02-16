@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/putih"
+    android:id="@+id/mainActivity"
+    tools:context="parking.view.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:background="@drawable/login_shape_bk"
+        android:orientation="vertical"
+        android:layout_weight="3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_home"></ImageView>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:elevation="2dp"
+        android:id="@+id/name"
+        android:layout_margin="25dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/univ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hello,"
+            android:textAlignment="textStart"
+            android:textColor="@color/putih"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/judul"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nama"
+            android:textAlignment="textStart"
+            android:textColor="@color/putih"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <ImageButton
+            android:id="@+id/card3"
+            android:background="@null"
+            android:clickable="true"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/ic_info_24px"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            app:tint="@color/putih" />
+
+        <ImageButton
+            android:id="@+id/card4"
+            android:background="@null"
+            android:clickable="true"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/ic_about"
+            android:layout_marginLeft="10dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            app:tint="@color/putih" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutnopolheader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="25dp"
+        android:layout_weight="3"
+        android:background="@drawable/bg_header"
+        android:elevation="2dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name">
+
+        <LinearLayout
+            android:id="@+id/layoutnopol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="15dp"
+            android:elevation="2dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/nopol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="15"
+                android:textColor="@color/putih"
+                android:hint="@string/nomorplatkendaraan"
+                android:backgroundTint="@color/putih"
+                android:textColorHint="@color/putih"
+                android:inputType="textPersonName" />
+
+                <Button
+                    android:id="@+id/scannopol"
+                    android:drawableStart="@drawable/ic_qrcode"
+                    android:backgroundTint="@color/putih"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="10dp"
+                    android:textStyle="bold"
+                    android:clickable="true"
+                    android:text="@string/scanplatnomor" />
+            </LinearLayout>
+            <Button
+                android:id="@+id/generate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:text="@string/makeqr" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutcheckin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:elevation="2dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            <TextView
+                android:textColor="@color/putih"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:text="@string/masukareaparkir"/>
+            <Button
+                android:id="@+id/scancheckin"
+                android:drawableStart="@drawable/ic_qrcode"
+                android:backgroundTint="@color/putih"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="10dp"
+                android:textStyle="bold"
+                android:clickable="true"
+                android:text="@string/scanqrcheckin" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ilustration_scan"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_margin="25dp"
+        android:background="@drawable/bg_qr"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutnopolheader">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_parking"
+                app:tint="@color/colorPrimary" />
+
+            <LinearLayout
+                android:layout_marginLeft="6dp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/parkir"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:textColor="@color/texthitamdoff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/checkparkir"
+                    android:textSize="12dp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_weight="1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_baseline_chevron_right_24"
+                app:tint="@color/texthitamdoff" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:id="@+id/list_layout"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/bg_qr"
+        android:elevation="2dp"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card2">
+
+        <TextView
+            android:id="@+id/juduls"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="@string/aktivitas"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/list_tugas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text2" />
+
+    </LinearLayout>
+
+<!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/bottom_navigation"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="50dp"-->
+<!--        android:layout_marginRight="50dp"-->
+<!--        android:layout_marginBottom="50dp"-->
+<!--        android:background="@drawable/bottom_navigation_background"-->
+<!--        android:elevation="2dp"-->
+<!--        app:itemIconTint="@drawable/bottom_navigation_color_selector"-->
+<!--        app:labelVisibilityMode="labeled"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:menu="@menu/bottom_navigation_menu" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "923657702229",
+    "project_id": "parkmate-amcc",
+    "storage_bucket": "parkmate-amcc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:923657702229:android:126d5046d0b4d72262fddc",
+        "android_client_info": {
+          "package_name": "id.parkmate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "923657702229-ur4g2u4i78rvvvbnf059esde9d9brcbn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbn3Se1gg26A3lw_Xsoo6DZe5h5j-Ob0o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "923657702229-ur4g2u4i78rvvvbnf059esde9d9brcbn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

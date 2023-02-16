@@ -1,15 +1,17 @@
 package id.parkmate.parking.view
 
+import android.R.attr.bitmap
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.provider.ContactsContract.Profile
 import android.provider.MediaStore
 import android.util.Log
 import android.util.SparseArray
-import android.view.Gravity
 import android.view.View
 import android.widget.*
 import androidmads.library.qrgenearator.QRGContents
@@ -28,6 +30,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.sachinvarma.easypermission.EasyPermissionInit
 import com.sachinvarma.easypermission.EasyPermissionList
+import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import com.thecode.aestheticdialogs.AestheticDialog
@@ -35,6 +38,8 @@ import com.thecode.aestheticdialogs.DialogStyle
 import com.thecode.aestheticdialogs.DialogType
 import com.thecode.aestheticdialogs.OnDialogClickListener
 import id.parkmate.R
+import id.parkmate.parking.model.data.dataprofiles
+import id.parkmate.parking.model.data.profile
 import id.parkmate.parking.model.data.sessionmanager
 import id.parkmate.parking.model.data.sessionmanager.Companion.Nama
 import id.parkmate.parking.model.data.sessionmanager.Companion.Npm
@@ -42,7 +47,6 @@ import id.parkmate.parking.model.data.sessionmanager.Companion.waktucheckIN
 import id.parkmate.parking.model.service.ApiClient
 import id.parkmate.parking.model.service.waktu
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
@@ -59,12 +63,14 @@ class MainActivity : AppCompatActivity() {
         val database = FirebaseDatabase.getInstance()
 
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
         sharedPreferences = getSharedPreferences("E-PARKING", Context.MODE_PRIVATE)
         val nama = sharedPreferences.getString(Nama, null)
-
+        val getImage = dataprofiles().NpmImg
         checkdatabase()
 
         setContentView(R.layout.activity_main)
@@ -77,6 +83,8 @@ class MainActivity : AppCompatActivity() {
         val checkintbn = findViewById<Button>(R.id.scancheckin)
         val layoutcheckin = findViewById<LinearLayout>(R.id.layoutcheckin)
         val layoutnopol = findViewById<LinearLayout>(R.id.layoutnopol)
+        val imageUser = findViewById<ImageView>(R.id.ivUser)
+        Picasso.get().load("$getImage").into(imageUser)
 
         val judul = findViewById<TextView>(R.id.judul)
         judul.text = "$nama"

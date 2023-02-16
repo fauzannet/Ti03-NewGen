@@ -38,8 +38,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivUser"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:src="@color/ic_launcher_background"/>
+
         <LinearLayout
-            android:layout_marginTop="30dp"
             android:layout_weight="1"
             android:orientation="vertical"
             android:layout_width="wrap_content"
@@ -47,18 +52,20 @@
 
         <TextView
             android:id="@+id/univ"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hello,"
+            android:layout_marginStart="10dp"
             android:textAlignment="textStart"
             android:textColor="@color/putih"
             android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/judul"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nama"
+            android:layout_marginStart="10dp"
             android:textAlignment="textStart"
             android:textColor="@color/putih"
             android:textSize="20sp"
@@ -71,7 +78,6 @@
             android:id="@+id/card3"
             android:background="@null"
             android:clickable="true"
-            android:layout_marginTop="30dp"
             android:src="@drawable/ic_info_24px"
             android:layout_width="25dp"
             android:layout_height="25dp"
@@ -81,7 +87,6 @@
             android:id="@+id/card4"
             android:background="@null"
             android:clickable="true"
-            android:layout_marginTop="30dp"
             android:src="@drawable/ic_about"
             android:layout_marginLeft="10dp"
             android:layout_width="25dp"

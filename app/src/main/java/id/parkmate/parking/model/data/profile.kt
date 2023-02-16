@@ -10,10 +10,10 @@ data class profile (
 )
 
 data class dataprofiles(
-    val Npm: String,
-    val Nama: String,
-    val Angkatan: String,
-    val EmailAmikom: String,
-    val Prodi: String,
-    val NpmImg: String
+    val Npm: String? = null,
+    val Nama: String? = null,
+    val Angkatan: String? = null,
+    val EmailAmikom: String? = null,
+    val Prodi: String? = null,
+    val NpmImg: String? = null
 )

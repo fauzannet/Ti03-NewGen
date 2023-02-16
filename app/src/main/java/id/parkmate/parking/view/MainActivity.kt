@@ -1,5 +1,6 @@
 package id.parkmate.parking.view
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -134,6 +135,8 @@ class MainActivity : AppCompatActivity() {
             overridePendingTransition(0, 0)
             startActivity(intent)
             overridePendingTransition(0, 0)
+
+            kapasitas()
         }
 
         buttoncheckin.setOnClickListener {
@@ -281,6 +284,23 @@ class MainActivity : AppCompatActivity() {
                 override fun onCancelled(error: DatabaseError) {
                     //Failed to read value
                     Log.w("error data firebase", "Failed to read value.", error.toException())
+                }
+            })
+        }
+
+        fun kapasitas()
+        {
+            val userRef = database.getReference("data")
+            userRef.child("kapasitas").addListenerForSingleValueEvent(object: ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val booleanValue = dataSnapshot.getValue(Boolean::class.java)
+
+                        val nilai = dataSnapshot.value.toString().toInt()
+                        val nilaiBaru = nilai - 1
+                    Log.d("kapasitas","nilai")
+                }
+                override fun onCancelled(error: DatabaseError) {
+                    // An error occurred
                 }
             })
         }

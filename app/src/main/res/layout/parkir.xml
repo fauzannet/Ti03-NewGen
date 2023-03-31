@@ -5,6 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:background="@drawable/login_shape_bk"
+        android:orientation="vertical"
+        android:layout_weight="3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_home" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,9 +38,24 @@
             android:id="@+id/back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="10dp"
-            android:layout_marginLeft="10dp"
-            android:text="Back" />
+            android:textSize="10sp"
+            android:layout_marginStart="10dp"
+            android:text="Back"
+            tools:ignore="SmallSp" />
+
+        <com.github.lzyzsd.circleprogress.ArcProgress
+            android:layout_marginTop="50dp"
+            android:id="@+id/arc_progress"
+            android:layout_gravity="center"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:arc_suffix_text=""
+            app:arc_stroke_width="10dp"
+            app:arc_max="500"
+            app:arc_unfinished_color="@color/colorPrimaryDark"
+            app:arc_text_color="@color/putih"
+            app:arc_progress="50"
+            app:arc_bottom_text="Kapasitas Parkiran"/>
 
     </LinearLayout>
 

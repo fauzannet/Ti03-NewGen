@@ -21,7 +21,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_home"></ImageView>
+            android:background="@drawable/bg_home"/>
 
     </LinearLayout>
 
@@ -42,7 +42,7 @@
             android:layout_marginTop="30dp"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content">
 
         <TextView
@@ -75,7 +75,8 @@
             android:src="@drawable/ic_info_24px"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            app:tint="@color/putih" />
+            app:tint="@color/putih"
+            android:focusable="true" />
 
         <ImageButton
             android:id="@+id/card4"
@@ -83,10 +84,11 @@
             android:clickable="true"
             android:layout_marginTop="30dp"
             android:src="@drawable/ic_about"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            app:tint="@color/putih" />
+            app:tint="@color/putih"
+            android:focusable="true" />
 
     </LinearLayout>
 
@@ -117,7 +119,7 @@
             <LinearLayout
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/nopol"
@@ -137,26 +139,29 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="10dp"
+                    android:textSize="10sp"
                     android:textStyle="bold"
                     android:clickable="true"
-                    android:text="@string/scanplatnomor" />
+                    android:text="@string/scanplatnomor"
+                    android:focusable="true"
+                    tools:ignore="SmallSp" />
             </LinearLayout>
             <Button
                 android:id="@+id/generate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="10dp"
+                android:textSize="10sp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
-                android:text="@string/makeqr" />
+                android:layout_marginStart="10dp"
+                android:text="@string/makeqr"
+                tools:ignore="SmallSp" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layoutcheckin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="15dp"
             android:elevation="2dp"
             android:orientation="horizontal">
@@ -164,13 +169,13 @@
             <LinearLayout
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content">
             <TextView
                 android:textColor="@color/putih"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:text="@string/masukareaparkir"/>
             <Button
                 android:id="@+id/scancheckin"
@@ -179,10 +184,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimary"
-                android:textSize="10dp"
+                android:textSize="10sp"
                 android:textStyle="bold"
                 android:clickable="true"
-                android:text="@string/scanqrcheckin" />
+                android:text="@string/scanqrcheckin"
+                android:focusable="true"
+                tools:ignore="SmallSp" />
             </LinearLayout>
 
             <ImageView
@@ -202,7 +209,6 @@
         android:layout_marginTop="20dp"
         android:layout_margin="25dp"
         android:background="@drawable/bg_qr"
-        android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -211,6 +217,12 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:gravity="center_vertical"
@@ -223,17 +235,18 @@
                 app:tint="@color/colorPrimary" />
 
             <LinearLayout
-                android:layout_marginLeft="6dp"
+                android:layout_marginStart="6dp"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="NestedWeights">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/parkir"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -241,17 +254,37 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/checkparkir"
-                    android:textSize="12dp" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
-            <ImageView
-                android:layout_weight="1"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_baseline_chevron_right_24"
-                app:tint="@color/texthitamdoff" />
+<!--            <ImageView-->
+<!--                android:layout_weight="1"-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:src="@drawable/ic_baseline_chevron_right_24"-->
+<!--                app:tint="@color/texthitamdoff" />-->
 
+        </LinearLayout>
+        <LinearLayout
+            android:layout_margin="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.github.lzyzsd.circleprogress.ArcProgress
+                android:id="@+id/arc_progress"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:arc_text_size="15dp"
+                app:arc_stroke_width="8dp"
+                app:arc_max="500"
+                app:arc_suffix_text=""
+                app:arc_suffix_text_size="1dp"
+                app:arc_finished_color="@color/colorPrimary"
+                app:arc_unfinished_color="@color/colorPrimaryDark"
+                app:arc_text_color="@color/colorPrimary"
+                app:arc_progress="50"/>
+        </LinearLayout>
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
@@ -282,7 +315,7 @@
             android:textSize="20sp" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list_tugas"
+            android:id="@+id/list_activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"

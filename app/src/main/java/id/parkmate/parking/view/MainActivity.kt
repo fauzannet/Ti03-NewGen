@@ -1,6 +1,6 @@
 package id.parkmate.parking.view
 
-import android.content.ContentValues.TAG
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -10,23 +10,21 @@ import android.os.CountDownTimer
 import android.provider.MediaStore
 import android.util.Log
 import android.util.SparseArray
-import android.view.Gravity
 import android.view.View
 import android.widget.*
 import androidmads.library.qrgenearator.QRGContents
 import androidmads.library.qrgenearator.QRGEncoder
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.vision.Frame
 import com.google.android.gms.vision.text.TextBlock
 import com.google.android.gms.vision.text.TextRecognizer
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.sachinvarma.easypermission.EasyPermissionInit
 import com.sachinvarma.easypermission.EasyPermissionList
 import com.theartofdev.edmodo.cropper.CropImage
@@ -36,14 +34,16 @@ import com.thecode.aestheticdialogs.DialogStyle
 import com.thecode.aestheticdialogs.DialogType
 import com.thecode.aestheticdialogs.OnDialogClickListener
 import id.parkmate.R
+import id.parkmate.parking.model.data.Data
+import id.parkmate.parking.model.data.ListAdapter
 import id.parkmate.parking.model.data.sessionmanager
 import id.parkmate.parking.model.data.sessionmanager.Companion.Nama
 import id.parkmate.parking.model.data.sessionmanager.Companion.Npm
 import id.parkmate.parking.model.data.sessionmanager.Companion.waktucheckIN
 import id.parkmate.parking.model.service.ApiClient
 import id.parkmate.parking.model.service.waktu
+import kotlinx.android.synthetic.main.parkir.*
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity() {
@@ -58,16 +58,17 @@ class MainActivity : AppCompatActivity() {
         private lateinit var textRecognizer: TextRecognizer
         private val tag: String? = "MainActivity"
         val database = FirebaseDatabase.getInstance()
+        private lateinit var dbref : DatabaseReference
+        private lateinit var userRecyclerview : RecyclerView
+        private lateinit var userArrayList : ArrayList<Data>
 
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         sharedPreferences = getSharedPreferences("E-PARKING", Context.MODE_PRIVATE)
         val nama = sharedPreferences.getString(Nama, null)
-
-        checkdatabase()
-
         setContentView(R.layout.activity_main)
 
         val generateButton = findViewById<Button>(R.id.generate)
@@ -90,6 +91,27 @@ class MainActivity : AppCompatActivity() {
         permission.add(EasyPermissionList.CAMERA)
 
         EasyPermissionInit(this@MainActivity, permission)
+
+        checkdatabase()
+
+        userRecyclerview = findViewById(R.id.list_activity)
+        userRecyclerview.layoutManager = LinearLayoutManager(this)
+        userArrayList = arrayListOf<Data>()
+        getUserData()
+
+
+        val userRef = database.getReference("data")
+        userRef.child("kapasitas").addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val nilai = dataSnapshot.value.toString().toInt()
+                Log.d("kapasitass","nilai = $nilai")
+                arc_progress.progress = nilai
+
+            }
+            override fun onCancelled(error: DatabaseError) {
+                // An error occurred
+            }
+        })
 
         sessionManager = sessionmanager(this)
         if (this.sessionManager.ischeckin()){
@@ -115,31 +137,27 @@ class MainActivity : AppCompatActivity() {
         }
 
         checkintbn.setOnClickListener {
-            sharedPreferences = getSharedPreferences("E-PARKING", Context.MODE_PRIVATE)
-            val npm = sharedPreferences.getString(Npm, null)
-            val npmsplit = npm?.replace(".", "")
-            val userRef = database.getReference("user")
-            userRef.child("$npmsplit").child("status").setValue(true)
-            sessionManager.hascheckin()
+//            sharedPreferences = getSharedPreferences("E-PARKING", Context.MODE_PRIVATE)
+//            sessionManager.hascheckin()
+//
+//            val waktus = waktu().waktuString
+//
+//            val editor: SharedPreferences.Editor = sharedPreferences.edit()
+//            editor.putString(waktucheckIN, waktus)
+//            sessionManager.waktucheckin(waktus)
+//
+//            val waktuss = sharedPreferences.getString(waktucheckIN, null)
+//            Log.d(tag, "$waktuss")
+//            finish()
+//            overridePendingTransition(0, 0)
+//            startActivity(intent)
+//            overridePendingTransition(0, 0)
 
-            val waktus = waktu().waktuString
-
-            val editor: SharedPreferences.Editor = sharedPreferences.edit()
-            editor.putString(waktucheckIN, waktus)
-            sessionManager.waktucheckin(waktus)
-
-            Log.d(tag, "di split = $npmsplit")
-            val waktuss = sharedPreferences.getString(waktucheckIN, null)
-            Log.d(tag, "$waktuss")
-            finish()
-            overridePendingTransition(0, 0)
+            val intent = Intent(this, scanqr::class.java)
             startActivity(intent)
-            overridePendingTransition(0, 0)
-
-            kapasitas()
         }
 
-        buttoncheckin.setOnClickListener {
+        show.setOnClickListener {
             sessionManager.undocheckin()
             Log.d(tag, "statuschekcin : Belum")
             finish()
@@ -199,7 +217,7 @@ class MainActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("E-PARKING", Context.MODE_PRIVATE)
         val nama = sharedPreferences.getString(Nama, null)
         val npm = sharedPreferences.getString(Npm, null)
-        val waktus = sharedPreferences.getString(waktucheckIN, null)
+        val waktucheckin = sharedPreferences.getString(waktucheckIN, null)
         val editTextnopol = findViewById<EditText>(R.id.nopol)
         val nopol = editTextnopol.text.toString()
 
@@ -209,11 +227,11 @@ class MainActivity : AppCompatActivity() {
         //dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         val view = layoutInflater.inflate(R.layout.qrcode, null)
 
+        val waktucheckout = waktu().waktuString
         val qrcodes = view.findViewById<ImageView>(R.id.qrcodes)
-        //val namasplit = nama?.replace(" ", ".")
         //val encryptedText = crypt().encrypt("$namasplit,$npm,$nopol")
-        Log.d(tag, "$nama,$npm,$nopol,$waktus")
-        val qrEncoder = QRGEncoder("$nama,$npm,$nopol,$waktus", null, QRGContents.Type.TEXT, 500)
+        Log.d(tag, "$nama,$npm,$nopol,$waktucheckin,$waktucheckout")
+        val qrEncoder = QRGEncoder("$nama,$npm,$nopol,$waktucheckin,$waktucheckout", null, QRGContents.Type.TEXT, 500)
 
         Log.d(tag, "Nama : $nama")
         Log.d(tag, "Npm : $npm")
@@ -257,6 +275,8 @@ class MainActivity : AppCompatActivity() {
                 })
                 .show()
         }
+
+
     }
 
 
@@ -288,25 +308,6 @@ class MainActivity : AppCompatActivity() {
             })
         }
 
-        fun kapasitas()
-        {
-            val userRef = database.getReference("data")
-            userRef.child("kapasitas").addListenerForSingleValueEvent(object: ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        val nilai = dataSnapshot.value.toString().toInt()
-                        val nilaiBaru = nilai - 1
-                    Log.d("kapasitas","nilai = $nilai")
-                    Log.d("kapasitas","nilai pengurangan = $nilaiBaru")
-                    val stringnilai: String = nilaiBaru.toString()
-                    userRef.child("kapasitas").setValue(stringnilai)
-                    Log.d("kapasitas",stringnilai)
-                }
-                override fun onCancelled(error: DatabaseError) {
-                    // An error occurred
-                }
-            })
-        }
-
         fun checkstatus(){
             sharedPreferences = getSharedPreferences("E-PARKING", Context.MODE_PRIVATE)
             val npm = sharedPreferences.getString(Npm, null)
@@ -333,10 +334,37 @@ class MainActivity : AppCompatActivity() {
             })
         }
 
-        private fun fetchPosts() {
-        }
+    private fun getUserData() {
 
-        override fun onBackPressed() {
+        sharedPreferences = getSharedPreferences("E-PARKING", Context.MODE_PRIVATE)
+        val npm = sharedPreferences.getString(Npm, null)
+        val npmsplit = npm?.replace(".", "")
+        val userRef = database.getReference("user")
+
+        userRef.child("$npmsplit").child("aktivitas").addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                if (snapshot.exists()){
+                    snapshot.children.forEach {
+                        val item = it.getValue(Data::class.java)
+                        userArrayList.add(item!!)
+                    }
+                    userRecyclerview.adapter = ListAdapter(userArrayList)
+
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+
+        })
+
+    }
+
+    override fun onBackPressed() {
         }
 
 

@@ -27,8 +27,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class
-Loginpage : AppCompatActivity() {
+class Loginpage : AppCompatActivity() {
 
     lateinit var sharedPreferences: SharedPreferences
     private lateinit var sessionManager: sessionmanager

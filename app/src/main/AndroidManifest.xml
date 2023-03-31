@@ -27,6 +27,7 @@
         <activity android:name="id.parkmate.parking.view.qrcode"/>
         <activity android:name="id.parkmate.parking.view.scanplat"/>
         <activity android:name="id.parkmate.parking.view.scanqr"/>
+        <activity android:name="id.parkmate.parking.view.Capacity"/>
         <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat"/>
     </application>

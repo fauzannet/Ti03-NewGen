@@ -65,7 +65,7 @@
             android:id="@+id/judul"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="AMIKOM"
+            android:text="ParkMate"
             android:textAlignment="textStart"
             android:textColor="@color/putih"
             android:textSize="30sp"
